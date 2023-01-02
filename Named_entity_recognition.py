@@ -5,6 +5,7 @@
 from transformers import pipeline
 import pickle # we need this to load our dataset
 from nltk.tokenize.treebank import TreebankWordDetokenizer
+from sklearn.metrics import accuracy_score, f1_score
 
 name_entity_recognition_model = pipeline("ner", aggregation_strategy='simple', device=0)
 
@@ -80,3 +81,7 @@ def compute_prediction(tokens, input_, ner_result):
   print("len(tokens", len(tokens))
   assert(len(predicted_tags) == len(tokens))
   return predicted_tags
+
+input_ = detokenizer.detokenize(inputs[9])
+ner_result = name_entity_recognition_model(input_)
+ptags = compute_prediction(inputs[9], input_, ner_result)
