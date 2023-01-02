@@ -12,3 +12,17 @@ with open('ner_train.pkl', 'rb') as f:
 
 with open('ner_test.pkl', 'rb') as f:
   corpus_test = pickle.load(f)
+
+print(corpus_test)
+
+inputs = []
+targets = []
+
+for sentence_tag_pairs in corpus_test:
+  tokens = []
+  target = []
+  for token, tag in sentence_tag_pairs:
+    tokens.append(token)
+    target.append(tag)
+  inputs.append(tokens)
+  targets.append(target)
