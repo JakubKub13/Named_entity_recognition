@@ -4,6 +4,7 @@
 
 from transformers import pipeline
 import pickle # we need this to load our dataset
+from nltk.tokenize.treebank import TreebankWordDetokenizer
 
 name_entity_recognition_model = pipeline("ner", aggregation_strategy='simple', device=0)
 
@@ -26,3 +27,7 @@ for sentence_tag_pairs in corpus_test:
     target.append(tag)
   inputs.append(tokens)
   targets.append(target)
+
+  print(inputs[9])
+  print(detokenizer.detokenize(inputs[9]))
+
