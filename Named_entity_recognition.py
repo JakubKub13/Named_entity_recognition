@@ -28,6 +28,9 @@ for sentence_tag_pairs in corpus_test:
   inputs.append(tokens)
   targets.append(target)
 
-  print(inputs[9])
-  print(detokenizer.detokenize(inputs[9]))
+print(inputs[9])
+detokenizer = TreebankWordDetokenizer()
 
+print(detokenizer.detokenize(inputs[9]))
+
+print(targets[9])
