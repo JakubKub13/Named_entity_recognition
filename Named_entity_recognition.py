@@ -85,3 +85,27 @@ def compute_prediction(tokens, input_, ner_result):
 input_ = detokenizer.detokenize(inputs[9])
 ner_result = name_entity_recognition_model(input_)
 ptags = compute_prediction(inputs[9], input_, ner_result)
+
+accuracy_score(targets[9], ptags)
+
+for targ, pred in zip(targets[9], ptags):
+  print(targ, pred)
+
+# get detokenized inputs to pass into ner model
+detok_inputs = []
+for tokens in inputs:
+  text = detokenizer.detokenize(tokens)
+  detok_inputs.append(text)
+
+# 17 min on CPU, 3 min on GPU
+ner_results = name_entity_recognition_model(detok_inputs)
+
+predictions = []
+for tokens, text, ner_result in zip(inputs, detok_inputs, ner_results):
+  pred = compute_prediction(tokens, text, ner_result)
+  predictions.append(pred)
+
+# https://stackoverflow.com/questions/11264684/flatten-list-of-lists
+def flatten(list_of_lists):
+  flattened = [val for sublist in list_of_lists for val in sublist]
+  return flattened
