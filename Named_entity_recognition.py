@@ -109,3 +109,10 @@ for tokens, text, ner_result in zip(inputs, detok_inputs, ner_results):
 def flatten(list_of_lists):
   flattened = [val for sublist in list_of_lists for val in sublist]
   return flattened
+
+# flatten targets and predictions
+flat_predictions = flatten(predictions)
+flat_targets = flatten(targets)
+
+accuracy_score(flat_targets, flat_predictions)
+f1_score(flat_targets, flat_predictions, average='macro')
